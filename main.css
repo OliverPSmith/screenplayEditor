@@ -31,3 +31,75 @@ textarea {
 button {
     margin: 5px;
 }
+
+
+.scene-heading, .subheading {
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    border-bottom: 1px solid black;
+}
+
+.character {
+    margin-left: 25%;
+    margin-bottom: -15px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.dialogue {
+    margin-left: 8%;
+    width: 40%;
+    text-align: center;
+}
+
+.action {
+    width: 50%;
+    font-size: 14px;
+}
+
+.transition {
+    font-style: italic;
+    margin-left: auto;
+    width: 40%;
+}
+
+.line {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 14px;
+}
+
+.line-buttons {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+}
+.line-buttons button {
+    margin-left: 5px;
+    margin-bottom: 4px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    opacity: .5;
+    transition: all .2s;
+}
+.line-buttons button:hover {
+    opacity: 1;
+}
+
+
+@media (max-width: 600px) {
+    .character, .dialogue, .action, .transition{
+        margin-left: 0;
+        width: 100%;
+        text-align: start;
+    }
+    .character.line-buttons {
+        margin-left: 25%;
+    }
+}

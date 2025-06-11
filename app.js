@@ -1,11 +1,6 @@
 
 
-let scriptLines = [
-    {   type: 'scene', text: '1 int. office'},
-    {   type: 'action', text: 'a man walks to his desk'},
-    {   type: 'charachter', text: 'jon'},
-    {   type: 'dialogue', text: 'where is my phone'}
-];
+let scriptLines = [];
 let editIndex = null;
 
 const STORAGE_KEY = 'screnplayScript';
@@ -34,12 +29,38 @@ const generateEventlisteners = () => {
     const btnContainer = document.getElementById('inputBtns');
     btnContainer.querySelectorAll('button').forEach(button => {
         button.addEventListener('click', () => {
-            console.log(button.dataset);
+           addLine(button.getAttribute('data-type'));
+           console.log(button.getAttribute('data-type'));
         });
     });
+};
+
+const saveToHistory = () => {
+    historyIndex.push(JSON.stringify(scriptLines));
+};
+
+const addLine = type => {
+    const input = document.getElementById('screenInput');
+    let text = input.value.trim();
+    if (!text) return;
+
+    saveToHistory();
+
+    if (editIndex !== null) {
+        scriptLines[editIndex] = {type, text};
+        editIndex = null;
+    }   else {
+        scriptLines.push({type, text});
+    }
+
+    input.value = '';
+    saveScript();
+    renderScript();
 }
 
-
+const saveScript = () => {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(scriptLines));
+};
 
 
 const renderScript = () => {

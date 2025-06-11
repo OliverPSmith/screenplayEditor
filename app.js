@@ -1,10 +1,10 @@
-
+// localStorage.removeItem('screnplayScript');
 
 let scriptLines = [];
-let editIndex = null;
+// let editIndex = null;
 
 const STORAGE_KEY = 'screnplayScript';
-const historyIndex = [];
+// const historyIndex = [];
 
 window.onload = () => {
     loadScript();
@@ -18,7 +18,7 @@ const loadScript = () => {
             scriptLines = JSON.parse(savedScript);
             renderScript();
         }   catch (e) {
-            console.error('Load Script Failed');
+            console.error('Load Script Failed', e);
         }
     }   else {
         renderScript();
@@ -29,13 +29,31 @@ const generateEventlisteners = () => {
     const btnContainer = document.getElementById('inputBtns');
     btnContainer.querySelectorAll('button').forEach(button => {
         button.addEventListener('click', () => {
-           addLine(button.getAttribute('data-type'));
-           console.log(button.getAttribute('data-type'));
+           addLine(button.dataset.type);
+           console.log(button.dataset.type);
         });
     });
 
-    const clearButton = document.getElementById('clearBtn');
-    const undoButton = document.getElementById('undoBtn');
+    // const clearButton = document.getElementById('clearBtn');
+    // const undoButton = document.getElementById('undoBtn');
+
+    
+
+    const output = document.getElementById('scriptOutput');
+    output.addEventListener('click', event => {
+        const target = event.target;
+            const index = +target.dataset.index;
+        
+            if (target.classList.contains('upBtn')) {
+                moveLineUp(index);
+            }   else if (target.classList.contains('downBtn')) {
+                moveLineDown(index);
+            }   else if (target.classList.contains('editBtn')) {
+                editLine(index);
+            }   else if (target.classList.contains('deleteBtn')) {
+                deleteLine(index);
+            }
+    });
 };
 
 const saveToHistory = () => {
@@ -47,7 +65,7 @@ const addLine = type => {
     let text = input.value.trim();
     if (!text) return;
 
-    saveToHistory();
+    // saveToHistory();
 
     // if (editIndex !== null) {
     //     scriptLines[editIndex] = {type, text};
@@ -62,9 +80,35 @@ const addLine = type => {
     renderScript();
 }
 
+const deleteLine = index => {
+    scriptLines.splice(index, 1);
+    saveScript();
+    renderScript();
+}
+
 const saveScript = () => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(scriptLines));
 };
+
+const moveLineUp = index => {
+    if (index <= 0) return;
+
+    [scriptLines[index - 1], scriptLines[index]] = 
+    [scriptLines[index], scriptLines[index - 1]];
+
+    saveScript();
+    renderScript();
+}
+
+const moveLineDown = index => {
+    if (index >= scriptLines.length - 1) return;
+
+    [scriptLines[index + 1], scriptLines[index]] = 
+    [scriptLines[index], scriptLines[index + 1]];
+
+    saveScript();
+    renderScript();
+}
 
 
 const renderScript = () => {
@@ -95,6 +139,17 @@ const renderScript = () => {
                 content = `<div>${line.text}</div>`;
         }
 
-        return `<div class="line">${content}</div>`;
+        return `<div class="line">
+                    ${content}
+                    <div class='line-buttons ${line.type === 'character' ? 'character' : ''}'>
+                        <button class="upBtn" data-index="${index}">🔼</button>
+                        <button class="downBtn" data-index="${index}">🔽</button>
+                        <button class="editBtn" data-index="${index}">✏️</button>
+                        <button class="deleteBtn" data-index="${index}">❌</button>
+                    </div>
+                </div>`;
     }).join('');
 }
+
+
+

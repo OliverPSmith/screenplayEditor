@@ -33,6 +33,9 @@ const generateEventlisteners = () => {
            console.log(button.getAttribute('data-type'));
         });
     });
+
+    const clearButton = document.getElementById('clearBtn');
+    const undoButton = document.getElementById('undoBtn');
 };
 
 const saveToHistory = () => {
@@ -46,12 +49,13 @@ const addLine = type => {
 
     saveToHistory();
 
-    if (editIndex !== null) {
-        scriptLines[editIndex] = {type, text};
-        editIndex = null;
-    }   else {
-        scriptLines.push({type, text});
-    }
+    // if (editIndex !== null) {
+    //     scriptLines[editIndex] = {type, text};
+    //     editIndex = null;
+    // }   else {
+    //     scriptLines.push({type, text});
+    // }
+    scriptLines.push({type, text});
 
     input.value = '';
     saveScript();

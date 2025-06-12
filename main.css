@@ -1,8 +1,10 @@
-* {
+
+/* * {
     /* margin: 8px;
     padding: 8px; */
-    box-sizing: border-box;
-}
+    /* box-sizing: border-box; */
+
+/*
 body {
     padding: 20px;
     font-family: Courier, monospace;
@@ -102,4 +104,268 @@ button {
     .character.line-buttons {
         margin-left: 25%;
     }
+} */
+/* Reset box-sizing for all elements */
+* {
+    box-sizing: border-box;
 }
+
+/* Body and base font */
+body {
+    padding: 20px;
+    font-family: "Courier New", Courier, monospace;
+    background: #f0f0f0;
+    color: #000;
+    font-size: 16px;
+    line-height: 1.3;
+    margin: 0;
+}
+
+/* Textarea input */
+textarea {
+    width: 100%;
+    height: 150px;
+    font-size: 16px;
+    margin-bottom: 10px;
+    font-family: "Courier New", Courier, monospace;
+    padding: 8px;
+    resize: vertical;
+}
+
+/* Output container */
+.output {
+    background: white;
+    padding: 20px 30px;
+    padding-right: 5px;
+    border: 1px solid #ccc;
+    min-height: 400px;
+    max-width: 800px;
+    margin: 20px auto;
+    box-shadow: 0 0 8px rgba(0,0,0,0.1);
+}
+
+/* === LINE + BUTTON CONTAINERS (you can style below) === */
+
+.line {
+    /* PLACE YOUR FLEX LAYOUT HERE */
+    /* display: flex;
+    flex-wrap: nowrap;
+    align-items: flex-end;
+    margin-bottom: 12px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 6px;    */
+
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: flex-end;
+    margin-bottom: 16px;
+} 
+
+
+.line > div:first-child {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+.line-buttons {
+    display: flex;
+    gap: 0px;
+    margin-left: auto;
+}
+
+.line-buttons button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 12px;
+    opacity: 0.5;
+    transition: 0.2s ease;
+    padding: 2px 4px;
+    line-height: 1;
+    min-width: 24px;
+    text-align: center;
+}
+
+.line-buttons button:hover {
+    opacity: 1;
+}
+
+.scene-heading, .subheading {
+    font-weight: bold;
+    text-transform: uppercase;
+    border-bottom: 1px solid black;
+    margin-top: 36px;
+    margin-right: 20px;
+    text-align: left;
+}
+
+/* Scene Heading */
+/* .scene-heading {
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-top: 36px;
+    margin-bottom: 18px;
+    border-bottom: 2px solid black;
+    padding-bottom: 4px;
+    font-size: 12pt;
+    text-align: left;
+} */
+
+.subheading {
+    margin-top: 18px;
+    font-size: 14px;
+    border-bottom: none;
+    text-decoration: underline;
+}
+
+/* Subheading */
+/* .subheading {
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-top: 24px;
+    margin-bottom: 12px;
+    border-bottom: 1px solid #444;
+    padding-bottom: 2px;
+    font-size: 11pt;
+    text-align: left;
+} */
+
+.action {
+    text-align: left;
+    font-style: italic;
+    font-size: 14px;
+}
+
+/* Action */
+/* .action {
+    margin: 0 0 16px 0;
+    text-align: left;
+    font-size: 12pt;
+} */
+
+.character {
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin-bottom: -16px;
+}
+
+/* Character */
+/* .character {
+    text-transform: uppercase;
+    text-align: center;
+    margin-top: 24px;
+    margin-bottom: 6px;
+    font-weight: bold;
+    letter-spacing: 1px;
+} */
+
+.dialogue {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 450px;
+    text-align: center;
+}
+
+/* Dialogue */
+/* .dialogue {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 450px;
+    font-size: 12pt;
+    margin-bottom: 16px;
+    padding-left: 40px;
+    padding-right: 40px;
+    line-height: 1.4;
+} */
+
+.transition {
+    text-align: right;
+    padding-right: 20px;
+    font-style: italic;
+    text-transform: uppercase;
+    font-size: 14px;
+}
+
+/* Transition */
+/* .transition {
+    font-style: italic;
+    text-transform: uppercase;
+    text-align: right;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    font-size: 11pt;
+    padding-right: 20px;
+} */
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    .output {
+        padding: 10px;
+    }
+    .line {
+        margin-bottom: 20px;
+    } 
+
+    .line-buttons button {
+        font-size: 10px;
+        padding: 2px;
+        min-width: 18px;
+        
+    }
+
+    .character {
+        margin-bottom: -20px;
+    }
+
+    .dialogue {
+        text-align: left;
+        padding-right: 20px;
+    }
+
+    /* .dialogue {
+        max-width: 100%;
+        padding-left: 15px;
+        padding-right: 15px;
+        margin-bottom: 12px;
+    }
+
+    .character {
+        margin-top: 18px;
+        margin-bottom: 4px;
+    }
+
+    .scene-heading, .subheading {
+        margin-top: 24px;
+        margin-bottom: 12px;
+    }
+
+    .transition {
+        padding-right: 10px;
+        margin-top: 20px;
+        margin-bottom: 12px;
+    }
+
+    .line {
+
+    }
+
+    .line-buttons {
+
+    }
+
+    .line-buttons button {
+        font-size: 12px;
+        padding: 1px 3px;
+        min-width: 20px;
+    }
+
+    .line-buttons button:hover {
+        opacity: 1;
+    } */
+}
+
+/* General buttons margin */
+/* button {
+    margin: 5px;
+} */

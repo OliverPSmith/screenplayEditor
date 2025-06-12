@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Test Buttons Alignment</title>
+<style>
+  body {
+    font-family: Courier, monospace;
+    margin: 20px;
+  }
+  .line {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    margin-bottom: 12px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 6px;
+  }
+  .line > div:first-child {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+  .line-buttons {
+    display: flex;
+    gap: 4px;
+    margin-left: auto;
+  }
+  .line-buttons button {
+    font-size: 14px;
+    padding: 2px 5px;
+    cursor: pointer;
+    opacity: 0.5;
+    border: none;
+    background: none;
+    min-width: 24px;
+  }
+  .line-buttons button:hover {
+    opacity: 1;
+  }
+
+  .action {
+    margin-left: 25px;
+    padding: 0 20px;
+  }
+
+  @media (max-width: 600px) {
+    .line-buttons {
+      gap: 2px;
+    }
+    .line-buttons button {
+      font-size: 12px;
+      padding: 2px 3px;
+      min-width: 20px;
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="line">
+    <div>INT. OFFICE - DAY</div>
+    <div class="line-buttons">
+      <button>🔼</button>
+      <button>🔽</button>
+      <button>✏️</button>
+      <button>❌</button>
+    </div>
+  </div>
+  <div class="line">
+    <div class="action">John enters the room quietly. Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure tempore, voluptas perspiciatis necessitatibus a veritatis.</div>
+    <div class="line-buttons">
+      <button>🔼</button>
+      <button>🔽</button>
+      <button>✏️</button>
+      <button>❌</button>
+    </div>
+  </div>
+</body>
+</html>

@@ -3,28 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A screenplay editor tool for writing and formatting scripts.">
+    <meta name="author" content="Your Name or Team Name">
+    <meta name="keywords" content="screenplay editor, script formatter, screenplay writing tool, online script editor, film script, screenplay formatting">
     <link rel="stylesheet" href="main.css">
-    <title>Screnplay Editor</title>
+    <title>Screenplay Editor</title>
 </head>
 <body>
-    <h1>Screenplay Editor</h1>
+    
+    <header>
+        <h1>Screenplay Editor</h1>
+    </header>
 
-    <textarea id="screenInput" placeholder="Type your script here..."></textarea>
-
-    <div id="inputBtns">
-        <button data-type="scene">Scene Heading</button>
-        <button data-type="subheading">Sub Heading</button>
-        <button data-type="action">Action</button>
-        <button data-type="character">Character</button>
-        <button data-type="dialogue">Dialogue</button>
-        <button data-type="transition">Transition</button>
-    </div>
-
-    <h2>Script Output</h2>
-    <button id="clearBtn">🗑️ Clear All</button>
-    <button id="undoBtn">↩️ Undo</button>
-    <div id="scriptOutput" class="output"></div>
-
+    <main>
+        <section id="editor">
+            <textarea id="screenInput" placeholder="Type your script here..."></textarea>
+            <div id="inputBtns">
+                <button data-type="scene" title="Insert Scene Heading">Scene Heading</button>
+                <button data-type="subheading" title="Insert  Subheading">Sub Heading</button>
+                <button data-type="action" title="Insert Action">Action</button>
+                <button data-type="character" title="Insert Character">Character</button>
+                <button data-type="dialogue" title="Insert Dialogue">Dialogue</button>
+                <button data-type="transition" title="Insert Transition">Transition</button>
+            </div>
+        </section>
+    
+        <section id="controls">
+            <h2>Script Output</h2>
+            <button id="clearBtn" title="Remove Entire Script">🗑️ Clear All</button>
+            <button id="undoBtn" title="Undo Last Action">↩️ Undo</button>
+        </section>
+    
+        <article id="scriptDisplay">
+            <div id="scriptOutput" class="output"></div>
+        </article>
+    </main>
+    
+    <footer>
+        <p>© 2025 Screenplay Editor App</p>
+    </footer>
     
 <script type="text/javascript" src="app.js"></script>
 </body>

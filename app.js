@@ -3,7 +3,7 @@
 
 // 1. Globals, in order of being built
 let scriptLines = [];
-const STORAGE_KEY = 'screnplayScript';
+const STORAGE_KEY = 'screenplayScript';
 let editIndex = null;
 const historyStack = [];
 
@@ -91,6 +91,7 @@ const editLine = index => {
     const input = document.getElementById('screenInput');
     input.value = scriptLines[index].text;
     editIndex = index;
+    input.focus(); 
 };
 
 const deleteLine = index => {
@@ -175,10 +176,10 @@ const renderScript = () => {
         return `<div class="line">
                     ${content}
                     <div class='line-buttons ${line.type === 'character' ? 'character' : ''}'>
-                        <button class="upBtn" data-index="${index}">🔼</button>
-                        <button class="downBtn" data-index="${index}">🔽</button>
-                        <button class="editBtn" data-index="${index}">✏️</button>
-                        <button class="deleteBtn" data-index="${index}">❌</button>
+                        <button type="button" class="upBtn" data-index="${index}">🔼</button>
+                        <button type="button" class="downBtn" data-index="${index}">🔽</button>
+                        <button type="button" class="editBtn" data-index="${index}">✏️</button>
+                        <button type="button" class="deleteBtn" data-index="${index}">❌</button>
                     </div>
                 </div>`;
     }).join('');
@@ -186,3 +187,4 @@ const renderScript = () => {
 
 
 
+// ${line.type === 'character' ? 'character' : ''}

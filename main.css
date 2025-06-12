@@ -125,12 +125,14 @@ textarea {
     } 
 
     .line-buttons button {
-        font-size: 10px;
-        padding: 2px;
-        min-width: 18px;
+        font-size: 14px;
+        padding: 2px 6px;
+        min-width: 20px;
         
     }
-
+    .scene-heading, .subheading, .action, .transition {
+        /* margin-right: 40px; */
+    }
     .character {
         margin-bottom: -20px;
     }

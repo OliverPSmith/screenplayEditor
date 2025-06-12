@@ -1,10 +1,13 @@
 // localStorage.removeItem('screnplayScript');
 
-let scriptLines = [];
-let editIndex = null;
-const STORAGE_KEY = 'screnplayScript';
-const historyIndex = [];
 
+// 1. Globals, in order of being built
+let scriptLines = [];
+const STORAGE_KEY = 'screnplayScript';
+let editIndex = null;
+const historyStack = [];
+
+// 2. Initialistion, load local storage / script / eventListeners
 window.onload = () => {
     loadScript();
     generateEventlisteners();
@@ -37,7 +40,6 @@ const generateEventlisteners = () => {
     document.getElementById('undoBtn').addEventListener('click', undoChange);
 
     
-
     const output = document.getElementById('scriptOutput');
     output.addEventListener('click', event => {
         const target = event.target;
@@ -56,10 +58,16 @@ const generateEventlisteners = () => {
 };
 
 
+// 3. Utilities,  save to local storage / save to the historyStack
+const saveScript = () => {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(scriptLines));
+};
+
 const saveToHistory = () => {
-    historyIndex.push(JSON.stringify(scriptLines));
+    historyStack.push(JSON.stringify(scriptLines));
 }
 
+// 4. Core functions
 const addLine = type => {
     const input = document.getElementById('screenInput');
     let text = input.value.trim();
@@ -92,20 +100,6 @@ const deleteLine = index => {
     renderScript();
 }
 
-const undoChange = () => {
-    if (historyIndex.length === 0) return
-
-    const lastState = historyIndex.pop();
-    scriptLines = JSON.parse(lastState);
-    editIndex = null;
-    saveScript();
-    renderScript();
-};
-
-const saveScript = () => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(scriptLines));
-};
-
 const moveLineUp = index => {
     if (index <= 0) return;
 
@@ -130,6 +124,16 @@ const moveLineDown = index => {
     renderScript();
 };
 
+const undoChange = () => {
+    if (historyStack.length === 0) return
+
+    const lastState = historyStack.pop();
+    scriptLines = JSON.parse(lastState);
+    editIndex = null;
+    saveScript();
+    renderScript();
+};
+
 const clearScript = () => {
     if (confirm('Permanently remove entire script?')) {
         saveToHistory();
@@ -139,7 +143,7 @@ const clearScript = () => {
     }
 };
 
-
+// 5. Render script
 const renderScript = () => {
     const output = document.getElementById('scriptOutput');
     output.innerHTML = scriptLines.map((line, index) => {
@@ -178,7 +182,7 @@ const renderScript = () => {
                     </div>
                 </div>`;
     }).join('');
-}
+};
 
 
 

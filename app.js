@@ -1,7 +1,7 @@
 // localStorage.removeItem('screnplayScript');
 
 let scriptLines = [];
-// let editIndex = null;
+let editIndex = null;
 
 const STORAGE_KEY = 'screnplayScript';
 // const historyIndex = [];
@@ -34,7 +34,7 @@ const generateEventlisteners = () => {
         });
     });
 
-    // const clearButton = document.getElementById('clearBtn');
+    document.getElementById('clearBtn').addEventListener('click', clearScript);
     // const undoButton = document.getElementById('undoBtn');
 
     
@@ -56,9 +56,9 @@ const generateEventlisteners = () => {
     });
 };
 
-const saveToHistory = () => {
-    historyIndex.push(JSON.stringify(scriptLines));
-};
+// const saveToHistory = () => {
+//     historyIndex.push(JSON.stringify(scriptLines));
+// };
 
 const addLine = type => {
     const input = document.getElementById('screenInput');
@@ -67,17 +67,23 @@ const addLine = type => {
 
     // saveToHistory();
 
-    // if (editIndex !== null) {
-    //     scriptLines[editIndex] = {type, text};
-    //     editIndex = null;
-    // }   else {
-    //     scriptLines.push({type, text});
-    // }
-    scriptLines.push({type, text});
+    if (editIndex !== null) {
+        scriptLines[editIndex] = {type, text};
+        editIndex = null;
+    }   else {
+        scriptLines.push({type, text});
+    }
+
 
     input.value = '';
     saveScript();
     renderScript();
+}
+
+const editLine = index => {
+    const input = document.getElementById('screenInput');
+    input.value = scriptLines[index].text;
+    editIndex = index;
 }
 
 const deleteLine = index => {
@@ -98,7 +104,7 @@ const moveLineUp = index => {
 
     saveScript();
     renderScript();
-}
+};
 
 const moveLineDown = index => {
     if (index >= scriptLines.length - 1) return;
@@ -108,7 +114,15 @@ const moveLineDown = index => {
 
     saveScript();
     renderScript();
-}
+};
+
+const clearScript = () => {
+    if (confirm('Permanently remove entire script?')) {
+        scriptLines = [];
+        localStorage.removeItem(STORAGE_KEY);
+        renderScript();
+    }
+};
 
 
 const renderScript = () => {

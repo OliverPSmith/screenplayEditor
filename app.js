@@ -166,7 +166,7 @@ const renderScript = () => {
                 content = `<div class="dialogue">${line.text}</div>`;
                 break;
             case 'transition':
-                content = `<div class="transition">${line.text}</div>`;
+                content = `<div class="transition">${line.text}:</div>`;
                 break;
             default:
                 content = `<div>${line.text}</div>`;

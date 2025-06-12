@@ -45,12 +45,12 @@ button {
     margin-bottom: -15px;
     font-weight: bold;
     text-transform: uppercase;
+    text-align: center;
 }
 
 .dialogue {
-    margin-left: 8%;
+    margin-left: 10%;
     width: 40%;
-    text-align: center;
 }
 
 .action {
@@ -61,7 +61,7 @@ button {
 .transition {
     font-style: italic;
     margin-left: auto;
-    width: 40%;
+    width: 30%;
 }
 
 .line {

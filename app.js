@@ -2,9 +2,8 @@
 
 let scriptLines = [];
 let editIndex = null;
-
 const STORAGE_KEY = 'screnplayScript';
-// const historyIndex = [];
+const historyIndex = [];
 
 window.onload = () => {
     loadScript();
@@ -35,7 +34,7 @@ const generateEventlisteners = () => {
     });
 
     document.getElementById('clearBtn').addEventListener('click', clearScript);
-    // const undoButton = document.getElementById('undoBtn');
+    document.getElementById('undoBtn').addEventListener('click', undoChange);
 
     
 
@@ -56,16 +55,17 @@ const generateEventlisteners = () => {
     });
 };
 
-// const saveToHistory = () => {
-//     historyIndex.push(JSON.stringify(scriptLines));
-// };
+
+const saveToHistory = () => {
+    historyIndex.push(JSON.stringify(scriptLines));
+}
 
 const addLine = type => {
     const input = document.getElementById('screenInput');
     let text = input.value.trim();
     if (!text) return;
 
-    // saveToHistory();
+    saveToHistory();
 
     if (editIndex !== null) {
         scriptLines[editIndex] = {type, text};
@@ -74,23 +74,33 @@ const addLine = type => {
         scriptLines.push({type, text});
     }
 
-
     input.value = '';
     saveScript();
     renderScript();
-}
+};
 
 const editLine = index => {
     const input = document.getElementById('screenInput');
     input.value = scriptLines[index].text;
     editIndex = index;
-}
+};
 
 const deleteLine = index => {
+    saveToHistory();
     scriptLines.splice(index, 1);
     saveScript();
     renderScript();
 }
+
+const undoChange = () => {
+    if (historyIndex.length === 0) return
+
+    const lastState = historyIndex.pop();
+    scriptLines = JSON.parse(lastState);
+    editIndex = null;
+    saveScript();
+    renderScript();
+};
 
 const saveScript = () => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(scriptLines));
@@ -98,6 +108,8 @@ const saveScript = () => {
 
 const moveLineUp = index => {
     if (index <= 0) return;
+
+    saveToHistory();
 
     [scriptLines[index - 1], scriptLines[index]] = 
     [scriptLines[index], scriptLines[index - 1]];
@@ -109,6 +121,8 @@ const moveLineUp = index => {
 const moveLineDown = index => {
     if (index >= scriptLines.length - 1) return;
 
+    saveToHistory();
+
     [scriptLines[index + 1], scriptLines[index]] = 
     [scriptLines[index], scriptLines[index + 1]];
 
@@ -118,6 +132,7 @@ const moveLineDown = index => {
 
 const clearScript = () => {
     if (confirm('Permanently remove entire script?')) {
+        saveToHistory();
         scriptLines = [];
         localStorage.removeItem(STORAGE_KEY);
         renderScript();
